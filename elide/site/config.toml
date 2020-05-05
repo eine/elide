@@ -1,0 +1,113 @@
+baseurl = "https://1138-4EB.github.io/elide"
+languageCode = "en-us"
+title = "ELIDE"
+disablePathToLower = true
+theme = "beautifulhugo"
+metaDataFormat = "yaml"
+pygmentsUseClasses = true
+pygmentCodeFences = true
+#disqusShortname = "XXX"
+#googleAnalytics = "XXX"
+
+[Params]
+  logo = "img/avatar-icon.png"
+  favicon = "img/favicon.ico"
+  subtitle = "Embedded Logic Integrated Development Environment"
+  dateFormat = "January 2, 2006"
+  ghrepo = "https://github.com/1138-4EB/elide/"
+  rss = true
+  comments = true
+#  gcse = "012345678901234567890:abcdefghijk" # Get your code from google.com/cse. Make sure to go to "Look and Feel" and change Layout to "Full Width" and Theme to "Classic"
+
+#[[Params.bigimg]]
+#  src = "img/triangle.jpg"
+#  desc = "Triangle"
+#[[Params.bigimg]]
+#  src = "img/sphere.jpg"
+#  desc = "Sphere"
+#[[Params.bigimg]]
+#  src = "img/hexagon.jpg"
+#  desc = "Hexagon"
+
+[Author]
+  name = "1138-4EB"
+  email = "1138-4EB@users.noreply.github.com"
+  github = "1138-4EB"
+  #facebook = "username"
+  #googleplus = "+username" # or xxxxxxxxxxxxxxxxxxxxx
+  #twitter = "username"
+  #reddit = "username"
+  #linkedin = "username"
+  #xing = "username"
+  #snapchat = "username"
+  #instagram = "username"
+  #youtube = "user/username" # or channel/channelname
+  #soundcloud = "username"
+  #spotify = "username"
+  #bandcamp = "username"
+  #itchio = "username"
+  #stackoverflow = "users/XXXXXXX/username"
+  #stackoverflow = "questions/tagged/ghdl"
+  #wikipedia = "List_of_HDL_simulators"
+
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Wiki"
+    url = "/wiki/Menu"
+    weight = 2
+
+[[menu.main]]
+    name = "Modules"
+    identifier = "modules"
+    weight = 3
+
+[[menu.main]]
+    name = "About"
+    url = "/page/about/"
+    weight = 4
+
+[[menu.main]]
+    name = "Tags"
+    url = "/tags"
+    weight = 5
+
+[[menu.main]]
+    parent = "modules"
+    name = "Docker"
+    url = ""
+    weight = 1
+
+[[menu.main]]
+    parent = "modules"
+    name = "CLI"
+    identfier = "elide-cli"
+    url = ""
+    weight = 3
+
+[[menu.main.modules]]
+    name = "IDE"
+    identfier = "elide-ide"
+    url = ""
+    weight = 2
+
+[[menu.main.modules]]
+    parent = "elide-ide"
+    name = "Frontend"
+    url = ""
+    weight = 2
+
+[[menu.main.modules]]
+    parent = "elide-ide"
+    name = "Backend"
+    url = ""
+    weight = 3
+
+[[menu.main.modules]]
+    parent = "elide-cli"
+    name = "go-icemulti"
+    url = ""
+    weight = 4

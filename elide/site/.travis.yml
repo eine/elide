@@ -1,0 +1,20 @@
+branches:
+  except:
+  - appveyor
+
+language: generic
+os: linux
+sudo: required
+install: true
+
+script:
+  - ". ./travis-deploy-pages2master.sh"
+
+git:
+  depth: 10
+#Please note that if you use a depth of 1 and have a queue of jobs, Travis CI won’t build commits that are in the queue when you push a new commit.
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "11fc2c380cc5"
+  - COMMIT_AUTHOR_EMAIL: "travis@pages.master"

@@ -1,0 +1,178 @@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/favicons/manifest.json">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#e05915">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#e05915">
+
+    <title>ELIDE</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <style>
+	body, html {
+	  font-family: "Roboto","Open Sans";
+      height: 100%;
+	  width: 100%;
+    }
+	.bg {
+      background-image: url("/images/landing.png");
+      height: 100%;
+	  width: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+	.elide-text {
+	  margin: auto;
+	  margin-top:50px;
+    }
+	.elide-text img {
+      display: block;
+      max-width: 100%;
+	  margin: auto;
+    }
+	.elide-text h1 {
+	   max-width: 99%;
+	   padding-top:20px;
+	   padding-bottom: 50px;
+	   font-size: 20pt;
+	   color: #e05915;
+	}
+	.serv {
+	  width: 100%;
+	  padding: 10px;
+	  margin-bottom: 20px;
+	  color: #fff;
+	}
+	.graphed {
+	  background-color: #cdd422c0;
+	}
+	.graphed:hover {
+	  background-color: #eee;
+	  color: #000;
+	}
+	.docs {
+	  background-color: #431c5dc0;
+	}
+	.docs:hover {
+	  background-color: #eee;
+	  color: #000;
+	}
+	.footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+	.servs { margin-bottom: 225px;}
+
+	.jumbotron {background-color: transparent;}
+
+	@media screen and (max-width: 768px){
+	  .elide-text h1 {
+	  	padding-top:10px;
+	    padding-bottom:30px;
+	    font-size: 16pt;
+	  }
+	  .serv {
+	    margin-bottom: 30px;
+	    color: #fff;
+	  }
+	  .forkme img { width: 105px; }
+	}
+
+	@media screen and (max-width: 480px){
+	  .forkme img { width: 85px; }
+    }
+
+	@media screen and (min-width: 640px){
+      .jumbotron.vertical-center {
+        margin-bottom: 0; /* Remove the default bottom margin of .jumbotron */
+      }
+	  .servs { margin-bottom: 325px;}
+      .vertical-center {
+         min-height: 100%;  /* Fallback for vh unit */
+         min-height: 100vh; /* You might also want to use 'height' property instead. Note that for percentage values of 'height' or 'min-height' properties, the 'height' of the parent element should be specified explicitly. In this case the parent of '.vertical-center' is the <body> element */
+         /* Make it a flex container */
+         display: -webkit-box;
+         display: -moz-box;
+         display: -ms-flexbox;
+         display: -webkit-flex;
+         display: flex;
+         /* Align the bootstrap's container vertically */
+           -webkit-box-align : center;
+         -webkit-align-items : center;
+              -moz-box-align : center;
+              -ms-flex-align : center;
+                 align-items : center;
+         /* In legacy web browsers such as Firefox 9 we need to specify the width of the flex container */
+         width: 100%;
+         /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers hence the bootstrap's container won't be aligned to the center anymore.
+            Therefore, we should use the following declarations to get it centered again */
+                -webkit-box-pack : center;
+                   -moz-box-pack : center;
+                   -ms-flex-pack : center;
+         -webkit-justify-content : center;
+                 justify-content : center;
+      }
+	}
+    </style>
+</head>
+<body class="bg">
+  <div class="jumbotron vertical-center">
+    <div class="container text-center">
+        <div class="elide-text row middle-align text-center">
+		  <!--<a href="/" title="ELIDE">-->
+		    <img src="/images/elide-text.svg" alt="ELIDE">
+		    <h1>Embedded Logic Integrated Design Environment</h1>
+		  <!--</a>-->
+		</div>
+
+        <div class="servs row text-center">
+		    <div class="col-md-1"></div>
+            <div class=".col-xs-12 col-md-5">
+			  <a href="grapheditor/index.html">
+			    <div class="serv graphed" title="mxGraph Editor">
+				  <i class="fa fa-cogs fa-5x"></i>
+				  <h4>mxGraph Editor</h4>
+                  <!--<p class="text-muted">Circuit and diagram editor built with mxgraph.</p>-->
+                </div>
+			  </a>
+			</div><!--
+         --><div class=".col-xs-12 col-md-5">
+		    <a href="doc/index.html">
+			  <div class="serv docs" title="Documentation">
+                  <i class="fa fa-book fa-5x"></i>
+                  <h4>Documentation</h4>
+                  <!--<p class="text-muted">Help, keyboard shortcut reference, third party tools...</p>-->
+                </div>
+			  </a>
+			</div>
+			<div class="col-md-1"></div>
+        </div>
+    </div>
+  </div>
+    <footer class="footer text-center">
+        <p>© Copyright 2017, 1138-4EB. Revision 00000000. Background image by @blickpixel at pixabay.com</p>
+    </footer>
+	<a class="forkme" href="https://github.com/1138-4EB/go" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+</body>
+</html>

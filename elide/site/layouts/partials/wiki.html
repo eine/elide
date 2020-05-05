@@ -1,0 +1,34 @@
+{{ $.Scratch.Set "title" .Title }}
+{{ if .Params.subtitle }}{{ $.Scratch.Set "subtitle" .Params.subtitle }}{{ end }}
+{{ if .Params.bigimg }}{{ $.Scratch.Set "bigimg" .Params.bigimg }}{{ end }}
+{{ $bigimg := $.Scratch.Get "bigimg" }}
+
+<header class="header-section">
+  <div class="intro-header no-img">
+    {{ $subtitle := $.Scratch.Get "subtitle" }}
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="{{ .Type }}-heading">
+        <h1>Wiki > {{ $.Scratch.Get "title" }}</h1>
+        <ul class="nav-wiki">      
+        <li class="dropdown btn-group">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-caret-down" aria-hidden="true"></i></a> 
+          <ul class="dropdown-menu">
+            <li><a title="View Source" alt="View Source" href="{{.Site.Params.ghrepo}}wiki/{{.Description}}"><i class="fa fa-eye" aria-hidden="true"></i> Source</a></li>
+            <li><a title="Edit on GitHub" alt="Edit on GitHub" href="{{.Site.Params.ghrepo}}wiki/{{.Description}}/_edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></li>
+            <li><a title="View History" alt="View History" href="{{.Site.Params.ghrepo}}wiki/{{.Description}}/_history"><i class="fa fa-history" aria-hidden="true"></i> History</a></li>
+            <li><a title="Comment" alt="Comment" href=""><i class="fa fa-comments-o" aria-hidden="true"></i> Comment</a></li>
+          </ul>
+          <span class="post-meta"> {{ .Date.Format "2006-01-02" }} | {{ .Lastmod.Format "2006-01-02" }} | {{.WordCount}} words | Approx. {{.ReadingTime}} min</span>
+        </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="small">
+  </div>
+</header>
+
+<div class="container" role="main">
+<!-- TOC: {{.TableOfContents}} -->
+{{.Content}}
+</div>

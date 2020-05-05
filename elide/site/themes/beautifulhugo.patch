@@ -1,0 +1,311 @@
+--- themes/beautifulhugo/layouts/_default/single.html	2017-04-09 00:36:05.707665400 +0200
++++ themes/beautifulhugo/layouts/_default/single.html	2017-04-09 06:00:53.739564700 +0200
+@@ -6,18 +6,24 @@
+   <body>
+ 
+     {{ partial "nav.html" . }}
+-    {{ partial "header.html" . }}
+ 
+-    <div class="container" role="main">
+-      {{ if eq .Type "post" }}
+-        {{ partial "post.html" . }}
+-      {{ else if eq .Type "page" }}
+-        {{ partial "page.html" . }}
++      {{ if eq .Type "wiki" }}
++        {{ partial "wiki.html" . }}
+       {{ else }}
+-        NO MATCHING PARTIAL
+-        {{.Content}}
++
++        {{ partial "header.html" . }}
++        <div class="container" role="main">
++          {{ if eq .Type "post" }}
++            {{ partial "post.html" . }}
++          {{ else if eq .Type "page" }}
++            {{ partial "page.html" . }}
++          {{ else }}
++            NO MATCHING PARTIAL
++            {{.Content}}
++          {{ end }}
++        </div>
++
+       {{ end }}
+-    </div>
+ 
+     {{ partial "footer.html" . }}
+
+--- themes/beautifulhugo/layouts/partials/footer.html	2017-04-09 00:36:05.709457000 +0200
++++ themes/beautifulhugo/layouts/partials/footer.html	2017-04-09 05:48:25.100480500 +0200
+@@ -38,8 +38,7 @@
+         </p>
+         <!-- Please don't remove this, keep my open source work credited :) -->
+         <p class="credits theme-by text-muted">
+-          <a href="http://gohugo.io">Hugo v{{ .Hugo.Version }}</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+-          {{ with .Site.Params.commit }}&nbsp;&bull;&nbsp;[<a href="{{.}}{{ getenv "GIT_COMMIT_SHA" }}">{{ getenv "GIT_COMMIT_SHA_SHORT" }}</a>]{{ end }}
++          <a href="http://gohugo.io">Hugo v{{ .Hugo.Version }}</a> powered&nbsp;&bull;&nbsp;Theme <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> (<a href="https://github.com/1138-4EB/elide/blob/pages/themes/beautifulhugo.patch">patched</a>){{ with .Site.Params.ghrepo }}&nbsp;&bull;&nbsp;[<a href="{{.}}elide/tree/{{ getenv "GIT_COMMIT_SHA" }}">{{ getenv "GIT_COMMIT_SHA_SHORT" }}</a>]{{ end }}
+         </p>
+       </div>
+     </div>
+--- themes/beautifulhugo/layouts/partials/head.html	2017-04-09 00:36:05.710058200 +0200
++++ themes/beautifulhugo/layouts/partials/head.html	2017-04-08 19:51:07.789683300 +0200
+@@ -42,7 +42,7 @@
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/main.css" />
+-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
++  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+   <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/pygment_highlights.css" />
+   <link rel="stylesheet" href="{{ .Site.BaseURL }}/css/highlight.min.css" />
+--- themes/beautifulhugo/layouts/partials/page.html	2017-04-09 05:45:45.820132600 +0200
++++ themes/beautifulhugo/layouts/partials/page.html	2017-04-09 05:59:53.716476400 +0200
+@@ -1,14 +1,12 @@
+-<div class="container" role="main">
+-  <div class="row">
+-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+-      {{ .Content }}
+-      {{ if (.Params.comments) | or (and (or (not (isset .Params "comments")) (eq .Params.comments nil)) (.Site.Params.comments)) }}
+-        {{ if .Site.DisqusShortname }}
+-          <div class="disqus-comments">
+-            {{ template "_internal/disqus.html" . }}
+-          </div>
+-        {{ end }}
++<div class="row">
++  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
++    {{ .Content }}
++    {{ if (.Params.comments) | or (and (or (not (isset .Params "comments")) (eq .Params.comments nil)) (.Site.Params.comments)) }}
++      {{ if .Site.DisqusShortname }}
++        <div class="disqus-comments">
++          {{ template "_internal/disqus.html" . }}
++        </div>
+       {{ end }}
+-    </div>
++    {{ end }}
+   </div>
+ </div>
+--- themes/beautifulhugo/layouts/partials/post.html	2017-04-09 05:45:45.821140900 +0200
++++ themes/beautifulhugo/layouts/partials/post.html	2017-04-09 01:17:22.555211100 +0200
+@@ -1,4 +1,3 @@
+-<div class="container">
+   <div class="row">
+     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+       <article role="main" class="blog-post">
+@@ -28,4 +27,4 @@
+ 
+     </div>
+   </div>
+-</div>
++
+--- themes/beautifulhugo/static/css/main.css	2017-04-09 00:36:05.714074900 +0200
++++ themes/beautifulhugo/static/css/main.css	2017-04-09 05:32:09.542137400 +0200
+@@ -3,15 +3,15 @@
+ /* --- General --- */
+ 
+ body {
+-  font-family: 'Lora', 'Times New Roman', serif;
+-  font-size: 18px;
++  font-family: 'Inconsolata', 'Arial', sans-serif;
++  font-size: 15px;
+   color: #404040;
+   position: relative;
+   background: #FFF;
+ }
+ p {
+   line-height: 1.5;
+-  margin: 30px 0;
++  margin: 25px 0;
+ }
+ p a {
+   /* text-decoration: underline */
+@@ -19,7 +19,7 @@
+ }
+ h1,h2,h3,h4,h5,h6 {
+   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+-  font-weight: 800;
++  font-weight: 700;
+ }
+ a {
+   color: #008AFF;
+@@ -96,6 +96,16 @@
+ 
+ /* --- Navbar --- */
+ 
++.navbar {
++  min-height: 30px;
++}
++
++.navbar-toggle {
++  margin-top: 2px;
++  margin-bottom: 2px;
++  padding: 5px;
++}
++
+ .navbar-custom {
+   background: #F5F5F5;
+   border-bottom: 1px solid #EAEAEA;
+@@ -110,6 +120,9 @@
+ 
+ .navbar-custom .navbar-brand,
+ .navbar-custom .nav li a {
++  padding-top: 5px;
++  padding-bottom: 5px;
++  height: 30px;
+   font-weight: 800;
+   color: #404040;
+ }
+@@ -128,7 +141,7 @@
+   transition: padding .5s ease-in-out;  
+ }
+ .navbar-custom .navbar-brand-logo img {
+-  height: 50px;
++  height: 30px;
+   -webkit-transition: height .5s ease-in-out;
+   -moz-transition: height .5s ease-in-out;
+   transition: height .5s ease-in-out;
+@@ -188,8 +201,8 @@
+ 
+ @media only screen and (min-width: 768px) {
+   .navbar-custom .avatar-container {
+-    width: 100px;
+-    margin-top: -50px;
++    width: 90px;
++    margin-top: -25px;
+   }
+   
+   .navbar-custom .avatar-container  .avatar-img-border {
+@@ -225,9 +238,13 @@
+   border-width: 0 1px 1px 1px;
+   font-weight: normal;
+ }
++
++.navbar-custom .nav .navlinks-container .navlinks-children a:hover {
++  background: #ddd;
++}
+ @media only screen and (max-width: 767px) {
+   .navbar-custom .nav .navlinks-container.show-children {
+-    background: #eee;
++    background: #ddd;
+   }
+   .navbar-custom .nav .navlinks-container.show-children .navlinks-children {
+     display: block;
+@@ -238,12 +255,14 @@
+     text-align: center;
+   }  
+   .navbar-custom .nav .navlinks-container:hover {
+-    background: #eee;
++    background: #ddd;
+   }
+   .navbar-custom .nav .navlinks-container:hover .navlinks-children {
+     display: block;
+   }
+   .navbar-custom .nav .navlinks-children {
++    width: 150%;
++    margin-left: -25%;
+     position: absolute;
+   }
+   .navbar-custom .nav .navlinks-container .navlinks-children a {
+@@ -256,10 +275,10 @@
+ /* --- Footer --- */
+ 
+ footer {
+-  padding: 30px 0;
++  padding: 10px 0;
+   background: #F5F5F5;
+   border-top: 1px #EAEAEA solid;
+-  margin-top: 50px;
++  margin-top: 20px;
+   font-size: 14px;
+ }
+ 
+@@ -271,6 +290,10 @@
+   margin: 0;
+   padding: 0;
+ }
++footer .credits {
++  margin: 10px;
++  text-align: center;
++}
+ footer .copyright {
+   font-family: Open Sans;
+   text-align: center;
+@@ -278,18 +301,18 @@
+ }
+ footer .theme-by {
+   text-align: center;
+-  margin: 10px 0 0;
++  margin: 5px 0 0;
+ }
+ 
+ @media only screen and (min-width: 768px) {
+   footer {
+-    padding: 50px 0;
++    padding: 10px 0;
+   }
+   footer .footer-links {
+-    font-size: 18px;
++    font-size: 14px;
+   }
+   footer .copyright {
+-    font-size: 16px;
++    font-size: 14px;
+   }
+ }
+  
+@@ -421,7 +444,7 @@
+ /* --- Post and page headers --- */
+ 
+ .intro-header {
+-  margin: 80px 0 20px;
++  margin: 80px 0 10px;
+   position: relative;
+ }
+ .intro-header.big-img {
+@@ -511,7 +534,7 @@
+     padding: 150px 0;
+   }  
+   .intro-header .page-heading h1 {
+-    font-size: 80px;
++    font-size: 70px;
+   }
+   .intro-header .post-heading h1 {
+     font-size: 50px;
+@@ -643,9 +666,14 @@
+ /* --- Code blocks --- */
+ 
+ pre {
+-  font-size: 16px;
++  font-size: 12px;
+   line-height: 1.5em;
+ }
++
++code {
++  font-size: 12px;
++}
++
+ pre code {
+   white-space: pre;
+ }
+@@ -694,4 +722,22 @@
+ input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus, .gsc-search-button {
+   box-sizing: content-box;
+   line-height: normal;
++}
++
++.wiki-heading {
++  text-align: center;
++}
++
++.nav-wiki {
++  min-width: 100px;
++  list-style: none;
++  padding-left: 0px;
++}
++
++.nav-wiki .dropdown-menu {
++   min-width: 100px;
++}
++
++.dropdown-menu>li>a {
++    white-space: normal;
+ }
+\ No newline at end of file

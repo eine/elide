@@ -1,0 +1,29 @@
+FROM alpine
+
+WORKDIR /root
+
+RUN apk add --no-cache -U \
+  autoconf \
+  bash \
+  build-base \
+  clang \
+  coreutils \
+  curl \
+  flex \
+  gawk \
+  git \
+  gperf \
+  graphviz \
+  gtk+2.0-dev \
+  libffi-dev \
+  libftdi1-dev \
+  mercurial \
+  pkgconfig \
+  python3 bison \
+  readline-dev \
+  subversion \
+  tcl-dev \
+  tk \
+  tk-dev \
+  xz-dev \
+ && rm -rf /var/cache/apk/* \

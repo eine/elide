@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>INBIT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.9.1/tachyons.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.5"></script>
+  </head>
+
+  <body>
+    <div id="app" class="sans-serif" v-on:click="ajax_post()">
+      <a v-if="state" class="tc f6 link dim br2 ba bw1 ph2 pv1 mb2 dib green" href="#0"><i class="fa fa-toggle-on fa-2x"></i><br><b>ON</b></a>
+      <a v-else class="tc f6 link dim br2 ba bw1 ph2 pv1 mb2 dib red" href="#0"><i class="fa fa-toggle-off fa-2x"></i><br><b>OFF</b></a>
+    </div>
+  </body>
+  
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        state: false
+      },
+      methods: {
+        ajax_post: function() {
+          this.state = !this.state; 
+          console.log("DTR:", this.state);
+          this.$http.post('/ajax/setDTR/',this.state).then((r) => {
+            var result = "";
+            if (r.status === 200) {
+              result='DTR set to ' + r.body;
+            } else {
+              result='Request failed. Returned status of ' + r.status;
+            }
+            console.log(result);
+          })
+        }
+      }
+    })
+  </script>
+</html>

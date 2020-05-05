@@ -1,0 +1,10 @@
+FROM ubuntu:latest
+
+WORKDIR /root
+
+RUN apt-get update && apt-get install -y python python-pip \
+ && pip install -U pip apio \
+ && mkdir -p /etc/udev/rules.d/ \
+# && apio drivers --enable \
+ && apio install --all \
+ && rm -rf /var/lib/apt/lists/* && apt-get clean all \

@@ -1,0 +1,30 @@
+FROM elide/alpine:3.5-python-3.6.1
+
+WORKDIR /work
+
+COPY /tmpinstall /elide/
+
+RUN apk add --no-cache \
+  ca-certificates \
+  graphviz \
+  gtk+2.0 \
+  imagemagick \
+  libftdi1 \
+  readline \
+  openssl \
+  tango-icon-theme \
+  tcl \
+  tk \
+  ttf-inconsolata \
+  xz \
+ && rm -rf /var/cache/apk/* \
+ && echo 'gtk-icon-theme-name = "Tango"' >> /usr/share/themes/Raleigh/gtk-2.0/gtkrc \
+ && export LC_ALL=C \
+ && mv /etc/profile.d/color_prompt /etc/profile.d/color_prompt.sh \
+ && cp /elide/init.sh /etc/profile.d/elide_init.sh \
+ && mkdir -p /etc/udev/rules.d/ \
+ && echo 'ACTION=="add", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE:="666"' > /etc/udev/rules.d/53-lattice-ftdi.rules
+
+CMD ["sh","-l"]
+
+#curl bash git gawk bison flex autoconf gperf \

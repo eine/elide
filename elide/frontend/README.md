@@ -1,0 +1,7 @@
+- `index.html`: landing page.
+  - `favicons`, `images`: common resources.
+  - `doc`: placeholder for a static site.
+  - `grapheditor`: playground to try developming with JS library mxgraph.
+    - `index.html`: app 
+    - `open.html`, `viewer.html`, `images`, `js`, `jscolor`, `resources`, `sanitizer`, `stencils`, `styles`,...: application resources
+    - `src`: minified sources of [jgraph/mxgraph](https://github.com/jgraph/mxgraph).

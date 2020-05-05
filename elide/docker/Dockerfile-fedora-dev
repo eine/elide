@@ -1,0 +1,26 @@
+FROM fedora:latest
+
+RUN dnf install -y \
+  automake \
+  bison \
+  clang \
+  flex \
+  gawk \
+  gcc \
+  gcc-c++ \
+  git \
+  gperf \
+  graphviz \
+  iverilog \
+  kernel-devel \
+  libffi-devel \
+  libftdi-devel \
+  make \
+  mercurial \
+  pkgconfig \
+  python-xdot \
+  python3 \
+  readline-devel \
+  tcl-devel \
+  which \
+ && dnf clean all --enablerepo=\*  \
